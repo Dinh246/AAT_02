@@ -23,7 +23,7 @@ export const test = base.extend<MyFixtures>({
         await page.goto('https://accounts.shopbase.com/sign-in')
         await use(login);
         await page.close();
-    },  { timeout: 60000 }],
+    },  { timeout: 35000 }],
 
     dashBoard: async ({ page, login }, use) =>{
         const dashBoard = new DashBoard(page)

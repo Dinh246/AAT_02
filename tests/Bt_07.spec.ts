@@ -2,18 +2,15 @@ import { test, expect } from '../src/fixtures/MyFixtures'
 require('dotenv').config();
 
 test.describe('Display of Real-time Visitors in Storefront', () => {
-    test('Display with default settings', async ({ realtimeVisitors, productDetail }) => {
-
-        await test.step('Verify the Real-time visitors is On', async () => {
-            await expect(realtimeVisitors.switchOnOffBtn.isChecked()).toBeTruthy();
-        });
-
+    
+    test('Display with default settings in Storefront', async ({ productDetail }) => {
+        
         await test.step('Go check Real-time visitors in store front', async () => {
             await expect(await productDetail.realtimeVisitorsEle).toContainText('people viewing this product right now');
         });
 
         await test.step('Verify the logic of random real-time visitors', async () => {
-            await expect(await productDetail.realtimeVisitorsNumEle).toHaveValue(/[10-100]/);
+            await expect(parseInt(await productDetail.realtimeVisitorsNumEle.innerText())).toBeLessThanOrEqual(100);
         });
     });
 

@@ -10,6 +10,7 @@ require('dotenv').config();
 export type MyFixtures = {
     login: Login;
     dashBoard: DashBoard;
+    dashBoardViaAPI:DashBoard;
     realtimeVisitors: RealtimeVisitors;
     homepage: Homepage;
     productDetail: ProductDetail;
@@ -21,6 +22,7 @@ export const test = base.extend<MyFixtures>({
         const login = new Login(page);
         await page.goto('https://accounts.shopbase.com/sign-in')
         await use(login);
+        await page.close();
     },  { timeout: 60000 }],
 
     dashBoard: async ({ page, login }, use) =>{
@@ -37,13 +39,17 @@ export const test = base.extend<MyFixtures>({
         await page.close();
     },
 
+    dashBoardViaAPI: async ({ page }, use) => {
+        const dashBoardViaAPI = new DashBoard(page);
+        await page.goto(`https://qa-team.onshopbase.com/admin/?access_token=${process.env.TOKEN}`);
+        await use(dashBoardViaAPI);
+        await page.close();
+    },
+
     realtimeVisitors: async({ dashBoard, page }, use) =>{
         const realtimeVisitors = new RealtimeVisitors(page);
         await dashBoard.openBoostConvertApp();
         await page.waitForSelector('h2:has-text("Pop types")')
-        await realtimeVisitors.goToSettings();
-        await page.waitForSelector('.s-check >> nth=0')
-        await realtimeVisitors.turnOnRealtimeVisitors();
         await use(realtimeVisitors);
         await page.close();
     },

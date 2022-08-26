@@ -18,8 +18,6 @@ test.describe('Display of Real-time Visitors in Storefront', () => {
         const textColorHex = "#ABC123";
         const backgroundColorHex = "#1A2B3C";
         const numberColorHex = "#DEF456";
-        const type = 'outline';
-        const fontIndex = 1;
         const fontSize = "20";
         const textColorRGB = "rgb(171, 193, 35)";
         const backgroundColorRGB = "rgb(26, 43, 60)";
@@ -32,8 +30,8 @@ test.describe('Display of Real-time Visitors in Storefront', () => {
                 textColor: textColorHex,
                 backgroundColor: backgroundColorHex,
                 numberColor: numberColorHex,
-                type: type,
-                fontIndex: fontIndex,
+                type: 'outline',
+                fontIndex: 1,
                 fontSize: fontSize
             });
         })
@@ -62,7 +60,7 @@ test.describe('Display of Real-time Visitors in Storefront', () => {
                 text_color: textColorHex,
                 background_color: backgroundColorHex,
                 number_color: numberColorHex,
-                type: type,
+                type: 'outline',
                 font_family: "Arial, 'Helvetica Neue', Helvetica, sans-serif",
                 font_size: parseInt(fontSize)
             })
@@ -70,12 +68,6 @@ test.describe('Display of Real-time Visitors in Storefront', () => {
     });
 
     test('Edit customize with invalid data', async ({ realtimeVisitors }) => {
-        const invalidTextColor = '123456';
-        const invalidBackGroundColor = '';
-        const invalidNumberColor = '#TEST12';
-        const type = 'none';
-        const fontIndex = 1;
-        const invalidFontSize = '7';
 
         await test.step('Go to Customize', async () => {
             await realtimeVisitors.goToCustomize();
@@ -83,12 +75,12 @@ test.describe('Display of Real-time Visitors in Storefront', () => {
 
         await test.step('Enter invalid data', async () => {
             await realtimeVisitors.customizeRealtimeVisitors({
-                textColor: invalidTextColor,
-                backgroundColor: invalidBackGroundColor,
-                numberColor: invalidNumberColor,
-                type: type,
-                fontIndex: fontIndex,
-                fontSize: invalidFontSize,
+                textColor: '123456',
+                backgroundColor: '',
+                numberColor: '#TEST12',
+                type: 'none',
+                fontIndex: 1,
+                fontSize: '7',
             })
         })
 

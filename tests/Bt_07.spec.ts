@@ -2,9 +2,9 @@ import { test, expect } from '../src/fixtures/MyFixtures'
 require('dotenv').config();
 
 test.describe('Display of Real-time Visitors in Storefront', () => {
-    
+
     test('Display with default settings in Storefront', async ({ productDetail }) => {
-        
+
         await test.step('Go check Real-time visitors in store front', async () => {
             await expect(await productDetail.realtimeVisitorsEle).toContainText('people viewing this product right now');
         });
@@ -85,10 +85,10 @@ test.describe('Display of Real-time Visitors in Storefront', () => {
         })
 
         await test.step('Verify the warning messages', async () => {
-            await expect(realtimeVisitors.textColorMess).toHaveText('Invalid color'),
-            await expect(realtimeVisitors.backgroundColorMess).toHaveText('Background color is required'),
-            await expect(realtimeVisitors.numberColorMess).toHaveText('Invalid color'),
-            await expect(realtimeVisitors.fontSizeMess).toHaveText('Font size must be between 8 and 36')
+            await expect(realtimeVisitors.textColorMess).toHaveText('Invalid color');
+            await expect(realtimeVisitors.backgroundColorMess).toHaveText('Background color is required');
+            await expect(realtimeVisitors.numberColorMess).toHaveText('Invalid color');
+            await expect(realtimeVisitors.fontSizeMess).toHaveText('Font size must be between 8 and 36');
         })
     })
 });
